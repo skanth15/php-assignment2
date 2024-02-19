@@ -1,0 +1,48 @@
+.headerdiv {
+    background-color: lightblue;
+    text-align: center;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+
+  .container{
+    display: flex;
+  }
+
+  .leftdiv {
+    background-color: lightgrey;
+    text-align: center;
+    font-size: 20px;
+    width: 500px;
+    height: 500px;
+    margin-right: 20px;
+  }
+  .rightdiv {
+    background-color: skyblue;
+    text-align: center;
+    font-size: 20px;
+    width: 500px;
+    height: 500px;
+    margin-right: 20px;
+  }
+
+  select {
+    margin-top: 0.5cm;
+  }
+
+  .back-btn:link, .back-btn:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .back-btn:hover, .back-btn:active {
+    background-color: red;
+  }
+
+  .count {
+    font-size: medium;
+  }

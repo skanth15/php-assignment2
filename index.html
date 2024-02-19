@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Home Page</title>
+</head>
+
+<body>
+  <div class="headerdiv">
+    <h1>Image / Banner</h1>
+  </div>
+
+
+
+  <div class="leftdiv">
+    <br>
+
+
+    <button>
+      <input type="radio" id="Letter_Mode" name="mode" value="Letter_Mode" onclick="toggleDropdown()">
+      <label for="Letter_Mode">Letter Mode</label><br>
+    </button>
+
+    <button>
+      <input type="radio" id="Word_Mode" name="mode" value="Word_Mode">
+      <label for="Word_Mode">Word Mode</label><br>
+    </button>
+    <br>
+
+    <select id="letterOptions" style="display:none;">
+      <option value="option1">All Letters</option>
+      <option value="option2">Only Vowels</option>
+      <option value="option3">Only Constants</option>
+    </select> <br>
+
+    <form action="/report.php" method="post">
+      <textarea id="Text_box" name="words" rows="8" cols="50" placeholder="User enters text here." oninput="updateCounts()"></textarea>
+      <br>
+      <div class="count">
+        <span id="wordCount">Word Count: 0</span> &nbsp; &nbsp;
+        <span id="charCount">Character Count: 0</span><br><br>
+      </div>
+
+      <input type="button" value="Reset" onclick="resetText()">
+      <input type="button" value="Update" onclick="updateText()">
+      <!-- <input type="button" value="Generate Report" onclick="generateReport()"> -->
+      <button type="submit">Generate Report</button>
+    </form>
+
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      var dropdown = document.getElementById("letterOptions");
+      dropdown.style.display = (dropdown.style.display == "none") ? "block" : "none";
+    }
+
+    function resetText() {
+      document.getElementById("Text_box").value = " ";
+      updateCounts(); // Reset counts when resetting text
+    }
+
+    function updateText() {
+      var mode = document.querySelector('input[name="mode"]:checked').value;
+      var userInput = document.getElementById("Text_box").value;
+
+      if (mode === 'Letter_Mode') {
+        var letterType = document.getElementById("letterOptions").value;
+
+        if (letterType === 'option2') {
+          userInput = userInput.replace(/[^aeiouAEIOU]/g, ''); // Keep only vowels
+        } else if (letterType === 'option3') {
+          userInput = userInput.replace(/[^qwrtypsdfghjklzxcvbmnQWRTYPSDFGHJKLZXCVBNM]/g, ''); // Keep only consonants
+        }
+      } else if (mode === 'Word_Mode') {
+        // Tokenize the input text into separate strings based on word boundaries
+        userInput = userInput.split(/\s+/).join(' ');
+      }
+
+      // Update the textarea with the filtered text
+      document.getElementById("Text_box").value = userInput;
+      updateCounts(); // Update counts after filtering text
+    }
+
+    function updateCounts() {
+      var userInput = document.getElementById("Text_box").value;
+      var wordCount = userInput.trim().split(/\s+/).length; // Count words
+      var charCount = userInput.replace(/\s/g, '').length; // Count characters
+      document.getElementById("wordCount").textContent = "Word Count: " + wordCount;
+      document.getElementById("charCount").textContent = "Character Count: " + charCount;
+    }
+
+    // function generateReport() {
+    //   // Implement your logic for generating a report here
+    // }
+
+    // Initial count update when page loads
+    // updateCounts();
+  </script>
+
+</body>
+
+</html>
