@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 function top10Words($text)
+
 {
     // Convert text to lowercase and remove punctuation
     $text = strtolower($text);
